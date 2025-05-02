@@ -1,0 +1,336 @@
+/* ========== General Layout ========== */
+body {
+  background-color: #fff;
+  font-family: 'Arial', sans-serif;
+  color: #2e2e2e;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  background: #fff;
+  max-width: 90%;
+  margin: 15px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #D40000;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+h2 {
+  color: #000;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+/* ========== Tables ========== */
+table {
+  width: 70%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #f7c3bf;
+  color: black;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+table button {
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  margin: 4px;
+}
+
+/* ========== Forms & Inputs ========== */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2px;
+  margin-top: 15px;
+}
+
+label {
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* Form Grid for Add/Edit Pages */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+
+@media (min-width: 768px) {
+  .form-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+.form-narrow {
+  max-width: 800px;
+  width: 100%;
+}
+
+/* Input Styling */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="date"],
+input[type="time"],
+select {
+  width: 100%;
+  height: 45px;
+  padding: 5px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: inherit;
+  appearance: none;
+}
+
+/* Schedule-specific inputs */
+.schedule-input {
+  min-width: 180px;
+  margin-right: 8px;
+}
+
+/* Input group layout */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.input-group label {
+  margin-bottom: 4px;
+}
+
+/* ========== Buttons ========== */
+button {
+  background-color: #D40000;
+  color: white;
+  padding: 12px 22px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 15px;
+  margin-right: 8px;
+}
+
+button:hover {
+  background-color: #B30000;
+}
+
+button:nth-child(2) {
+  margin-left: 8px;
+}
+
+/* Small button (e.g. Add Shift form) */
+.small-button {
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+/* Back button */
+.back-button {
+  background-color: #ccc;
+  color: white;
+  width: 200px;
+  height: 50px;
+  border-radius: 6px;
+  padding: 12px 22px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.back-button:hover {
+  background-color: #999;
+}
+
+/* Add button (dashboard) */
+.add-button {
+  background-color: #FFCC00;
+  font-weight: bold;
+  color: black;
+  border: none;
+  padding: 10px 16px;
+  margin: 0 10px 20px 0;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+  background-color: #e6b800;
+}
+
+/* ========== Layout Helpers ========== */
+.center-button-container,
+.back-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+/* ========== Filter Section ========== */
+.filter-buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-bottom: 30px;
+  margin-right: 250px;
+}
+
+.filter-button-wrapper {
+  flex-shrink: 0;
+}
+
+.filter-button {
+  padding: 10px 26px;
+  font-size: 1.1rem;
+  background-color: #FFD200;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-yellow {
+  background-color: #FFD200;
+  color: #000;
+  font-weight: bold;
+  padding: 14px 28px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 175px;
+}
+
+.button-gray {
+  background-color: #ccc;
+  color: #000;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Filter form layout */
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 30px auto;
+  max-width: 1000px;
+  align-items: flex-end;
+}
+
+.filter-form > div {
+  min-width: 200px;
+}
+
+.filter-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: #333;
+  white-space: nowrap;
+  text-align: left;
+  width: 220px;
+}
+
+.filter-form input,
+.filter-form select {
+  height: 45px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-grid > .button-row {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: end;
+}
+
+/* Filter form button column */
+.action-button-column {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 15px;
+  width: 100%;
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+/* ========== Schedule Section ========== */
+.schedule-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  margin: 15px auto 20px;
+}
+
+.schedule-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-left: 320px;
+}
+
+input,
+select {
+  line-height: 1.5;
+  vertical-align: middle;
+}
