@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Database Configuration
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cfa1.sqlite"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cfa.sqlite"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)  # ✅ Initialize db here

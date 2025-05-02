@@ -262,24 +262,40 @@ def get_filtered_schedule():
     date = request.args.get("date")
     min_duration = request.args.get("min_duration", type=float)
 
-    query = Schedule.query
+    base_query = "SELECT * FROM schedule"
+    conditions = []
+    params = {}
 
-    if restaurant_id:
-        query = query.filter(Schedule.restaurant_id == restaurant_id)
-    if date:
-        query = query.filter(Schedule.date == date)
+    if restaurant_id and date:
+        conditions.append("restaurant_id = :restaurant_id AND date = :date")
+        params.update({"restaurant_id": restaurant_id, "date": date})
+    else:
+        if restaurant_id:
+            conditions.append("restaurant_id = :restaurant_id")
+            params["restaurant_id"] = restaurant_id
+        if date:
+            conditions.append("date = :date")
+            params["date"] = date
+
     if min_duration is not None:
-        query = query.filter(Schedule.duration >= min_duration)
+        conditions.append("duration >= :min_duration")
+        params["min_duration"] = min_duration
 
-    results = query.all()
-    return jsonify([{
-        "id": s.id,
-        "employee_id": s.employee_id,
-        "restaurant_id": s.restaurant_id,
-        "date": s.date,
-        "start_time": s.start_time,
-        "end_time": s.end_time
-    } for s in results])
+    where_clause = " WHERE " + " AND ".join(conditions) if conditions else ""
+    sql = text(f"{base_query}{where_clause}")
+
+    rows = db.session.execute(sql, params).fetchall()
+
+    return jsonify([
+        {
+            "id": r.id,
+            "employee_id": r.employee_id,
+            "restaurant_id": r.restaurant_id,
+            "date": r.date,
+            "start_time": r.start_time,
+            "end_time": r.end_time
+        } for r in rows
+    ])
 
 @routes.route("/schedule", methods=["POST"])
 def create_schedule():

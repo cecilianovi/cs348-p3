@@ -34,13 +34,14 @@ class Schedule(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     employee_id = db.Column(db.Integer, db.ForeignKey("employee.id"), nullable=False)
     restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurant.id"), nullable=False)
-    date = db.Column(db.String(50), nullable=False, index=True)
+    date = db.Column(db.String(50), nullable=False)
     start_time = db.Column(db.String(50), nullable=False)
     end_time = db.Column(db.String(50), nullable=False)
-    duration = db.Column(db.Float, nullable=True, index=True)  # in hours
+    duration = db.Column(db.Float, nullable=True)
 
     __table_args__ = (
-        db.Index('idx_employee_date', 'employee_id', 'date'),
+        db.Index('idx_restaurant_date', 'restaurant_id', 'date'),  # composite index
+        db.Index('idx_duration', 'duration'),                      # single index
     )
 
     def calculate_duration(self):
@@ -50,7 +51,7 @@ class Schedule(db.Model):
             end_dt = datetime.strptime(self.end_time, fmt)
             delta = end_dt - start_dt
             self.duration = round(delta.total_seconds() / 3600, 2)
-        except Exception as e:
+        except Exception:
             self.duration = None
 
     def __repr__(self):
