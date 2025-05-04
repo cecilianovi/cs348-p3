@@ -11,8 +11,8 @@ class Restaurant(db.Model):
     phone_number = db.Column(db.String(20), nullable=False)
     manager_id = db.Column(db.Integer, db.ForeignKey("employee.id"), nullable=True)
 
-    employees = db.relationship('Employee', backref='restaurant', lazy=True, foreign_keys='Employee.restaurant_id')
-    schedules = db.relationship('Schedule', backref='restaurant', lazy=True)
+    employees = db.relationship('Employee', backref='restaurant', lazy=True, cascade="all, delete", foreign_keys='Employee.restaurant_id')
+    schedules = db.relationship('Schedule', backref='restaurant', lazy=True, cascade="all, delete")
 
     def __repr__(self):
         return f"<Restaurant {self.name}>"
@@ -25,15 +25,22 @@ class Employee(db.Model):
     phone_number = db.Column(db.String(20), nullable=False)
     salary = db.Column(db.Integer, nullable=False)
     manager_id = db.Column(db.Integer, db.ForeignKey("employee.id"), nullable=True)
-    restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurant.id"), nullable=False)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurant.id", ondelete="CASCADE"), nullable=False)
+
+    schedules = db.relationship(
+        'Schedule',
+        backref='employee',
+        lazy=True,
+        cascade="all, delete"
+    )
 
     def __repr__(self):
         return f"<Employee {self.first_name} {self.last_name}>"
 
 class Schedule(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    employee_id = db.Column(db.Integer, db.ForeignKey("employee.id"), nullable=False)
-    restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurant.id"), nullable=False)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurant.id", ondelete="CASCADE"), nullable=False)
+    employee_id = db.Column(db.Integer, db.ForeignKey("employee.id", ondelete="CASCADE"), nullable=False)
     date = db.Column(db.String(50), nullable=False)
     start_time = db.Column(db.String(50), nullable=False)
     end_time = db.Column(db.String(50), nullable=False)
